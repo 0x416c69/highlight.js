@@ -21,10 +21,4 @@ script:
     fi
 
     node tools/build.js $BUILD_PARAMS
-
-    if [ "x$BROWSER" = "x1" ]; then
-      npm run test-browser
-    else
-      npm run test
-    fi
 sudo: false  # Use container-based architecture
