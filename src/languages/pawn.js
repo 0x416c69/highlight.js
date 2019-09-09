@@ -8,7 +8,7 @@ Category: common, system
 function(hljs) {
   var PAWN_PRIMITIVE_TYPES = {
     className: 'keyword',
-    begin: '\\b[a-z\\d_]*_t\\b'
+    begin: ''
   };
 
   var STRINGS = {
@@ -26,7 +26,6 @@ function(hljs) {
     className: 'number',
     variants: [
       { begin: '\\b(0b[01\']+)' },
-      { begin: '(-?)\\b([\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)(u|U|l|L|ul|UL|f|F|b|B)' },
       { begin: '(-?)(\\b0[xX][a-fA-F0-9\']+|(\\b[\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)([eE][-+]?[\\d\']+)?)' }
     ],
     relevance: 0
@@ -58,7 +57,7 @@ function(hljs) {
   var FUNCTION_TITLE = hljs.IDENT_RE + '\\s*\\(';
 
   var PAWN_KEYWORDS = {
-    keyword: 'int float while char sizeof for static stock ' +
+    keyword: 'forward while char sizeof for static stock ' +
       'bool if public do goto enum else break case ' +
       'switch continue new throw return emit',
     built_in: 'Float',
@@ -85,17 +84,13 @@ function(hljs) {
         contains: ['self', PAWN_PRIMITIVE_TYPES]
       },
       {
-        begin: hljs.IDENT_RE + '::',
-        keywords: PAWN_KEYWORDS
-      },
-      {
         // This mode covers expression context where we can't expect a function
         // definition and shouldn't highlight anything that looks like one:
         // `return some()`, `else if()`, `(x*sum(1, 2))`
         variants: [
           {begin: /=/, end: /;/},
           {begin: /\(/, end: /\)/},
-          {beginKeywords: 'new throw return else', end: /;/}
+          {beginKeywords: 'return else', end: /;/}
         ],
         keywords: PAWN_KEYWORDS,
         contains: EXPRESSION_CONTAINS.concat([
