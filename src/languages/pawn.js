@@ -6,7 +6,7 @@ Category: common, system
 */
 
 function(hljs) {
-  var CPP_PRIMITIVE_TYPES = {
+  var PAWN_PRIMITIVE_TYPES = {
     className: 'keyword',
     begin: '\\b[a-z\\d_]*_t\\b'
   };
@@ -66,7 +66,7 @@ function(hljs) {
   };
 
   var EXPRESSION_CONTAINS = [
-    CPP_PRIMITIVE_TYPES,
+    PAWN_PRIMITIVE_TYPES,
     hljs.C_LINE_COMMENT_MODE,
     hljs.C_BLOCK_COMMENT_MODE,
     NUMBERS,
@@ -82,7 +82,7 @@ function(hljs) {
       {
         begin: '\\b(stack)\\s*<', end: '>',
         keywords: PAWN_KEYWORDS,
-        contains: ['self', CPP_PRIMITIVE_TYPES]
+        contains: ['self', PAWN_PRIMITIVE_TYPES]
       },
       {
         begin: hljs.IDENT_RE + '::',
@@ -131,7 +131,7 @@ function(hljs) {
               hljs.C_BLOCK_COMMENT_MODE,
               STRINGS,
               NUMBERS,
-              CPP_PRIMITIVE_TYPES,
+              PAWN_PRIMITIVE_TYPES,
               // Count matching parentheses.
               {
                 begin: /\(/, end: /\)/,
@@ -143,7 +143,7 @@ function(hljs) {
                   hljs.C_BLOCK_COMMENT_MODE,
                   STRINGS,
                   NUMBERS,
-                  CPP_PRIMITIVE_TYPES
+                  PAWN_PRIMITIVE_TYPES
                 ]
               }
             ]
@@ -151,14 +151,6 @@ function(hljs) {
           hljs.C_LINE_COMMENT_MODE,
           hljs.C_BLOCK_COMMENT_MODE,
           PREPROCESSOR
-        ]
-      },
-      {
-        className: 'class',
-        beginKeywords: 'class struct', end: /[{;:]/,
-        contains: [
-          {begin: /</, end: />/, contains: ['self']}, // skip generic stuff
-          hljs.TITLE_MODE
         ]
       }
     ]),
