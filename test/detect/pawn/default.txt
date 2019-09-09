@@ -1,0 +1,21 @@
+#include <a_samp>
+
+static stock const g_Test[] = {
+    1,
+    2,
+    3,
+};
+
+enum testEnum (<<=1)
+{
+    E_TEST = 1,
+    E_TEST2,
+};
+
+public OnGameModeInit()
+{
+    new testString[128];
+    testString = "Test test test";
+    printf(testString);
+    return 1;
+}
